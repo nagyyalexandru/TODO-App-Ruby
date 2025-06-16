@@ -6,6 +6,10 @@
 #
 one: {}
 # column: value
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 #
 two: {}
 # column: value
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
