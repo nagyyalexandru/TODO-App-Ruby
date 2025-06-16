@@ -1,9 +1,16 @@
-<%# app/views/home/index.html.erb %>
-<h1>Welcome</h1>
-<% if current_user %>
-  <p>Hello, <%= current_user.email %></p>
-  <%= link_to "Logout", logout_path, method: :delete %>
-<% else %>
-  <%= link_to "Signup", new_user_path %> |
-  <%= link_to "Login", new_session_path %>
-<% end %>
+<div class="home-index">
+  <h1>Welcome</h1>
+
+  <% if current_user %>
+    <div class="welcome-message">
+      <p>Hello, <strong><%= current_user.email %></strong>! Nice to see you back.</p>
+      <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-primary" %>
+    </div>
+  <% else %>
+    <div class="welcome-message">
+      <p>New here? Signup or login to get started</p>
+      <%= link_to "Signup", new_user_path, class: "btn btn-secondary" %> |
+      <%= link_to "Login", new_session_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>
