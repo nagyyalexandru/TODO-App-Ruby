@@ -22,10 +22,10 @@ Rails.application.routes.draw do
   root "home#index"
 
   # Signup
-  resources :users, only: [:new, :create]
+  resources :users, only: [ :new, :create ]
 
   # Sessions (login)
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [ :new, :create, :destroy ]
 
   # Provide convenient routes
   get "/login", to: "sessions#new", as: :login

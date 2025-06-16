@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 
-gem 'authlogic'
-gem 'recaptcha'
-gem 'simple_form'
-gem 'scrypt', '~> 3.0'
+gem "authlogic"
+gem "recaptcha"
+gem "simple_form"
+gem "scrypt", "~> 3.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2", ">= 7.2.2.1"
