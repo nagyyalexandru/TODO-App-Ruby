@@ -21,12 +21,16 @@
 Rails.application.routes.draw do
   root "home#index"
 
+  # Signup
   resources :users, only: [:new, :create]
+
+  # Sessions (login)
   resources :sessions, only: [:new, :create, :destroy]
 
+  # Provide convenient routes
+  get "/login", to: "sessions#new", as: :login
   delete "/logout", to: "sessions#destroy", as: :logout
-  get "/login", to: "sessions#new"
 
-  # separate route for recaptcha
+  # Separate route for recaptcha
   post "/recaptcha_verify", to: "users#create", as: :recaptcha_verify
 end
