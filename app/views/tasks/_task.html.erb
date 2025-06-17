@@ -1,0 +1,11 @@
+<div id="<%= dom_id task %>" class="task <%= 'completed' if task.completed %>">
+  <%= form_with(model: [task.todo_list, task], method: :patch) do |form| %>
+    <%= form.check_box :completed, onchange: "this.form.requestSubmit()" %>
+    <span><%= task.title %></span>
+    <% if task.notes.present? %>
+      <div class="notes"><%= task.notes %></div>
+    <% end %>
+  <% end %>
+
+  <%= button_to "Delete", [task.todo_list, task], method: :delete %>
+</div>

@@ -10,6 +10,14 @@
       <p>Hello, <strong><%= current_user.email %></strong>! Nice to see you back.</p>
       <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-primary" %>
     </div>
+
+    <div id="todo_lists">
+      <%= render current_user.accessible_todo_lists %>
+    </div>
+
+    <div id="new_todo_list">
+      <%= render "todo_lists/form", todo_list: TodoList.new %>
+    </div>
   <% else %>
     <div class="welcome-message">
       <h1>Welcome!</h1>

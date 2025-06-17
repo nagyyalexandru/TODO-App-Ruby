@@ -1,0 +1,7 @@
+<%= turbo_stream.append dom_id(@task.todo_list, :tasks) do %>
+  <%= render @task %>
+<% end %>
+
+<%= turbo_stream.replace dom_id(@task.todo_list, :new_task) do %>
+  <%= render "tasks/form", task: Task.new(todo_list: @task.todo_list) %>
+<% end %>

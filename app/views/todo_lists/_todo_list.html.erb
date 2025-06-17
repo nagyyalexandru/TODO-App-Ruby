@@ -1,0 +1,22 @@
+<div id="<%= dom_id todo_list %>" class="todo-list">
+  <h3><%= todo_list.title %></h3>
+  
+  <% if todo_list.user == current_user %>
+    <div id="share_form_<%= todo_list.id %>">
+      <%= render "list_shares/form", todo_list: todo_list %>
+    </div>
+  <% end %>
+
+  <div id="<%= dom_id(todo_list, :tasks) %>">
+    <%= render todo_list.tasks %>
+  </div>
+
+  <div id="<%= dom_id(todo_list, :new_task) %>">
+    <%= render "tasks/form", task: Task.new(todo_list: todo_list) %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Edit", edit_todo_list_path(todo_list), data: { turbo_frame: "edit_todo_list_#{todo_list.id}" } %>
+    <%= button_to "Delete", todo_list_path(todo_list), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
+  </div>
+</div>

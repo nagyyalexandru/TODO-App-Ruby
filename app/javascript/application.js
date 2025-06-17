@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "https://www.google.com/recaptcha/api.js"
 import "controllers"
+import "sortablejs"
