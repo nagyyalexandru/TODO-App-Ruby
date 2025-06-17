@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_todo_list
-  before_action :set_task, only: [:update, :destroy]
+  before_action :set_task, only: [ :update, :destroy ]
 
   def create
     @task = @todo_list.tasks.new(task_params)

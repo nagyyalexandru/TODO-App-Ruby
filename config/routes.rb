@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root "home#index"
-  
+
   # Signup
   resources :users, only: [ :new, :create ]
 
@@ -16,11 +16,11 @@ Rails.application.routes.draw do
 
   # API routes
   resources :todo_lists do
-  resources :tasks, only: [:create, :update, :destroy] do
+  resources :tasks, only: [ :create, :update, :destroy ] do
     member do
       patch :update_position
     end
   end
-  resources :list_shares, only: [:create, :destroy]
+  resources :list_shares, only: [ :create, :destroy ]
 end
 end

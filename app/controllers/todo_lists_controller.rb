@@ -1,5 +1,5 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [:update, :destroy]
+  before_action :set_todo_list, only: [ :update, :destroy ]
 
   def index
     @todo_lists = current_user.accessible_todo_lists
@@ -8,7 +8,7 @@ class TodoListsController < ApplicationController
 
   def create
     @todo_list = current_user.todo_lists.new(todo_list_params)
-    
+
     if @todo_list.save
       respond_to do |format|
         format.turbo_stream

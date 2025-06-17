@@ -3,7 +3,7 @@ class ListSharesController < ApplicationController
 
   def create
     @list_share = @todo_list.list_shares.new(list_share_params)
-    
+
     if @list_share.save
       respond_to do |format|
         format.turbo_stream

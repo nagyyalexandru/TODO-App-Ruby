@@ -11,7 +11,7 @@ class ListShare < ApplicationRecord
   private
 
   def broadcast_share
-    broadcast_replace_to todo_list, 
+    broadcast_replace_to todo_list,
                          target: "share_form_#{todo_list_id}",
                          partial: "list_shares/form",
                          locals: { todo_list: todo_list }
