@@ -1,5 +1,5 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [ :update, :destroy ]
+  before_action :set_todo_list, only: [:update, :destroy]
 
   def index
     @todo_lists = current_user.accessible_todo_lists
@@ -8,6 +8,7 @@ class TodoListsController < ApplicationController
 
   def create
     @todo_list = current_user.todo_lists.new(todo_list_params)
+    @todo_lists = current_user.accessible_todo_lists # Needed to re-render index if needed
 
     if @todo_list.save
       respond_to do |format|
@@ -15,9 +16,19 @@ class TodoListsController < ApplicationController
         format.html { redirect_to root_path }
       end
     else
-      render :new
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            'new_todo_list',
+            partial: 'todo_lists/form',
+            locals: { todo_list: @todo_list }
+          )
+        end
+        format.html { redirect_to root_path, alert: "Title can't be blank" }
+      end
     end
   end
+
 
   def update
     if @todo_list.update(todo_list_params)
