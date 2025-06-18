@@ -1,9 +1,13 @@
-<%= form_with(model: [task.todo_list, task]) do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title, required: true %>
+<div id="new_task_<%= task.todo_list.id %>">
+  <%= form_with(model: [task.todo_list, task],
+               data: { turbo_frame: "tasks_frame" },
+               id: "task_form_#{task.todo_list.id}") do |form| %>
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true %>
 
-  <%= form.label :notes %>
-  <%= form.text_area :notes %>
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
 
-  <%= form.submit %>
-<% end %>
+    <%= form.submit %>
+  <% end %>
+</div>

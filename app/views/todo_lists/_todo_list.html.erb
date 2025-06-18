@@ -7,13 +7,11 @@
     </div>
   <% end %>
 
-  <div id="<%= dom_id(todo_list, :tasks) %>">
+  <div id="tasks_<%= todo_list.id %>">
     <%= render todo_list.tasks %>
   </div>
 
-  <div id="<%= dom_id(todo_list, :new_task) %>">
-    <%= render "tasks/form", task: Task.new(todo_list: todo_list) %>
-  </div>
+  <%= render "tasks/form", task: Task.new(todo_list: todo_list) %>
 
   <div class="actions">
     <%= link_to "Edit", edit_todo_list_path(todo_list), data: { turbo_frame: "edit_todo_list_#{todo_list.id}" } %>

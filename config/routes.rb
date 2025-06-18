@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   # API routes
   resources :todo_lists do
-  resources :tasks, only: [ :create, :update, :destroy ] do
+  resources :tasks, only: [ :new, :create, :update, :destroy ] do
     member do
       patch :update_position
     end

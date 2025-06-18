@@ -1,9 +1,13 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [:update, :destroy]
+  before_action :set_todo_list, only: [ :update, :destroy ]
 
   def index
     @todo_lists = current_user.accessible_todo_lists
     @todo_list = TodoList.new
+  end
+
+  def show
+    @todo_list = TodoList.find(params[:id])
   end
 
   def create
@@ -19,8 +23,8 @@ class TodoListsController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
-            'new_todo_list',
-            partial: 'todo_lists/form',
+            "new_todo_list",
+            partial: "todo_lists/form",
             locals: { todo_list: @todo_list }
           )
         end

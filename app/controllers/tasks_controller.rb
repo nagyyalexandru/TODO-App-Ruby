@@ -1,18 +1,27 @@
 class TasksController < ApplicationController
+  include ActionView::RecordIdentifier
+
   before_action :set_todo_list
   before_action :set_task, only: [ :update, :destroy ]
 
   def create
-    @task = @todo_list.tasks.new(task_params)
-    @task.position = @todo_list.tasks.maximum(:position).to_i + 1
+    @todo_list = TodoList.find(params[:todo_list_id])
+    @task = @todo_list.tasks.build(task_params.merge(completed: false))
 
-    if @task.save
-      respond_to do |format|
+    respond_to do |format|
+      if @task.save
         format.turbo_stream
         format.html { redirect_to root_path }
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "task_form_#{@todo_list.id}",
+            partial: "tasks/form",
+            locals: { task: @task }
+          )
+        end
+        format.html { render :new }
       end
-    else
-      render :new
     end
   end
 
