@@ -1,5 +1,5 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [ :update, :destroy ]
+  before_action :set_todo_list, only: [ :edit, :update, :destroy ]
 
   def index
     @todo_lists = current_user.accessible_todo_lists
@@ -33,15 +33,44 @@ class TodoListsController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "edit_todo_list_#{@todo_list.id}",
+          partial: "todo_lists/form",
+          locals: { todo_list: @todo_list }
+        )
+      end
+      format.html do
+        render partial: "todo_lists/form", locals: { todo_list: @todo_list }, layout: false
+      end
+    end
+  end
 
   def update
     if @todo_list.update(todo_list_params)
       respond_to do |format|
-        format.turbo_stream
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "edit_todo_list_#{@todo_list.id}",
+            partial: "todo_lists/todo_list",
+            locals: { todo_list: @todo_list }
+          )
+        end
         format.html { redirect_to root_path }
       end
     else
-      render :edit
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "edit_todo_list_#{@todo_list.id}",
+            partial: "todo_lists/todo_list",
+            locals: { todo_list: @todo_list, editing: true }
+          )
+        end
+        format.html { render :edit }
+      end
     end
   end
 
