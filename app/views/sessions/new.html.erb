@@ -1,9 +1,8 @@
-<div class="sessions-new container">
+<div class="auth-container">
   <h1>Login</h1>
-
   <%= simple_form_for(@user_session, url: sessions_path) do |f| %>
     <%= f.input :email %>
     <%= f.input :password %>
-    <%= f.button :submit, "Login" %>
+    <%= f.button :submit, "Login", class: "btn primary" %>
   <% end %>
 </div>

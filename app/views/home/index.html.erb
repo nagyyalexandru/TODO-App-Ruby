@@ -6,9 +6,9 @@
   <% end %>
 
   <% if current_user %>
-    <div class="welcome-message">
+    <div class="welcome-header">
       <p>Hello, <strong><%= current_user.email %></strong>! Nice to see you back.</p>
-      <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-primary" %>
+      <%= button_to "Logout", logout_path, method: :delete, class: "btn primary" %>
     </div>
 
     <div id="todo_lists">
@@ -19,11 +19,11 @@
       <%= render "todo_lists/form", todo_list: TodoList.new %>
     </div>
   <% else %>
-    <div class="welcome-message">
+    <div class="text-center">
       <h1>Welcome!</h1>
       <p>New here? Signup or login to get started</p>
-      <%= link_to "Signup", new_user_path, class: "btn btn-secondary" %> |
-      <%= link_to "Login", new_session_path, class: "btn btn-secondary" %>
+      <%= link_to "Signup", new_user_path %> |
+      <%= link_to "Login", new_session_path %>
     </div>
   <% end %>
 </div>
