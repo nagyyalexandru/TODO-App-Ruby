@@ -1,5 +1,5 @@
 <div id="<%= dom_id todo_list %>" class="todo-list">
-  <%= turbo_frame_tag "edit_todo_list_#{todo_list.id}" do %>
+  <%= turbo_frame_tag "todo_list_#{todo_list.id}" do %>
     <h3><%= todo_list.title %></h3>
     
     <% if todo_list.user == current_user %>
@@ -15,8 +15,7 @@
     <%= render "tasks/form", task: Task.new(todo_list: todo_list) %>
 
     <div class="actions">
-      <%= link_to "Edit", edit_todo_list_path(todo_list), 
-      data: { turbo_frame: "edit_todo_list_#{todo_list.id}" } %>
+      <%= link_to "Edit", edit_todo_list_path(todo_list), data: { turbo_frame: "todo_list_#{todo_list.id}" } %>
       <%= button_to "Delete", todo_list_path(todo_list), method: :delete, 
             form: { data: { turbo_confirm: "Are you sure?" } } %>
     </div>

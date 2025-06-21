@@ -34,40 +34,19 @@ class TodoListsController < ApplicationController
   end
 
   def edit
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          "edit_todo_list_#{@todo_list.id}",
-          partial: "todo_lists/form",
-          locals: { todo_list: @todo_list }
-        )
-      end
-      format.html do
-        render partial: "todo_lists/form", locals: { todo_list: @todo_list }, layout: false
-      end
-    end
+    render partial: "todo_lists/form", locals: { todo_list: @todo_list }
   end
 
   def update
     if @todo_list.update(todo_list_params)
       respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "edit_todo_list_#{@todo_list.id}",
-            partial: "todo_lists/todo_list",
-            locals: { todo_list: @todo_list }
-          )
-        end
-        format.html { redirect_to root_path }
+        format.turbo_stream
+        format.html { redirect_to root_path, notice: "Updated." }
       end
     else
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "edit_todo_list_#{@todo_list.id}",
-            partial: "todo_lists/todo_list",
-            locals: { todo_list: @todo_list, editing: true }
-          )
+          render partial: "todo_lists/form", locals: { todo_list: @todo_list }
         end
         format.html { render :edit }
       end
