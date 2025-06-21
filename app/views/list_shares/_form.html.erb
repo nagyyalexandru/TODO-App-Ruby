@@ -1,0 +1,17 @@
+<%= form_with(model: [todo_list, ListShare.new]) do |form| %>
+  <%= form.collection_select :user_id, User.where.not(id: current_user.id), :id, :email, { prompt: "Select user" } %>
+  <%= form.select :permission_level, [["Read Only", "read"], ["Read & Write", "read_write"]] %>
+  <%= form.submit "Share", class: "btn secondary" %>
+<% end %>
+
+<% if todo_list.shared_users.any? %>
+  <h4>Shared With:</h4>
+  <ul>
+    <% todo_list.list_shares.each do |share| %>
+      <li>
+        <%= share.user.email %> (<%= share.permission_level %>)
+        <%= button_to "Remove", [todo_list, share], method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

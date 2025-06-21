@@ -326,6 +326,8 @@ GEM
     simple_form (5.3.1)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    sortablejs-rails (1.15.6)
+      rails (>= 6.0.0, < 9)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -392,6 +394,7 @@ DEPENDENCIES
   scrypt (~> 3.0)
   selenium-webdriver
   simple_form
+  sortablejs-rails
   sprockets-rails
   stimulus-rails
   turbo-rails
