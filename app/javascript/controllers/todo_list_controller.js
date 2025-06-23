@@ -1,12 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
-import { Sortable } from "sortablejs"
 
 export default class extends Controller {
   connect() {
-    this.sortable = Sortable.create(this.element, {
-      animation: 150,
-      onEnd: this.updatePosition.bind(this)
-    })
+    console.log("TodoListController connected")
   }
 
   async updatePosition(event) {
