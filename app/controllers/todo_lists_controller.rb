@@ -1,4 +1,5 @@
 class TodoListsController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :set_todo_list, only: [ :edit, :update, :destroy ]
 
   def index
@@ -34,19 +35,31 @@ class TodoListsController < ApplicationController
   end
 
   def edit
-    render partial: "todo_lists/form", locals: { todo_list: @todo_list }
+    @todo_lists = current_user.accessible_todo_lists
+    render turbo_stream: [
+      turbo_stream.replace(@todo_list, partial: "todo_lists/form", locals: { todo_list: @todo_list }),
+      *(@todo_lists - [@todo_list]).map do |list|
+        turbo_stream.remove(dom_id(list))
+      end,
+      turbo_stream.update("new_todo_list", "") # Empty instead of remove
+    ]
   end
 
   def update
+    @todo_lists = current_user.accessible_todo_lists
     if @todo_list.update(todo_list_params)
       respond_to do |format|
-        format.turbo_stream
+        format.turbo_stream { render :update }
         format.html { redirect_to root_path, notice: "Updated." }
-      end
+    end
     else
       respond_to do |format|
         format.turbo_stream do
-          render partial: "todo_lists/form", locals: { todo_list: @todo_list }
+          render turbo_stream: turbo_stream.replace(
+            dom_id(@todo_list),
+            partial: "todo_lists/form",
+            locals: { todo_list: @todo_list }
+          )
         end
         format.html { render :edit }
       end

@@ -9,11 +9,11 @@
   text-decoration: none;
 
   &.primary {
-    background-color: #5a4dff;
+    background-color: #4698e5;
     color: white;
 
     &:hover {
-      background-color: #4439e6;
+      background-color: #63bdf1;
     }
   }
 
@@ -37,12 +37,8 @@
 
   &.link {
     background: none;
-    color: #5a4dff;
+    color: #4698e5;
     padding: 0;
     font-size: 0.95rem;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 }

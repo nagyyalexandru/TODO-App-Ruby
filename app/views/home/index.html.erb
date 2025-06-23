@@ -1,29 +1,32 @@
 <div class="home-index">
-  <% if flash[:notice] %>
+    <% if flash[:notice] %>
     <div class="flash-message notice">
-      <p><%= flash[:notice] %></p>
+        <p><%= flash[:notice] %></p>
     </div>
-  <% end %>
+    <% end %>
 
-  <% if current_user %>
+    <% if current_user %>
+    <%= link_to "Home", root_path, class: "btn link" %>
     <div class="welcome-header">
-      <p>Hello, <strong><%= current_user.email %></strong>! Nice to see you back.</p>
-      <%= button_to "Logout", logout_path, method: :delete, class: "btn primary" %>
+        <p>Hello, <strong><%= current_user.email %></strong>! Nice to see you back.</p>
+        <%= button_to "Sign Out", logout_path, method: :delete, class: "btn primary" %>
     </div>
 
     <div id="todo_lists">
-      <%= render current_user.accessible_todo_lists %>
+        <%= render @todo_lists %>
+        <div id="new_todo_list">
+            <%= turbo_frame_tag "new_todo_list" do %>
+            <%= render "todo_lists/form", todo_list: @todo_list || TodoList.new %>
+            <% end %>
+        </div>
     </div>
 
-    <div id="new_todo_list">
-      <%= render "todo_lists/form", todo_list: TodoList.new %>
-    </div>
-  <% else %>
+    <% else %>
     <div class="text-center">
-      <h1>Welcome!</h1>
-      <p>New here? Signup or login to get started</p>
-      <%= link_to "Signup", new_user_path %> |
-      <%= link_to "Login", new_session_path %>
+        <h1>Welcome!</h1>
+        <p>New here? Signup or login to get started</p>
+        <%= link_to "Signup", new_user_path %> |
+        <%= link_to "Login", new_session_path %>
     </div>
-  <% end %>
+    <% end %>
 </div>

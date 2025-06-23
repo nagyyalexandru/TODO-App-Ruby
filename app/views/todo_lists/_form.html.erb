@@ -10,12 +10,18 @@
         </ul>
       </div>
     <% end %>
+
     <div>
       <%= form.label :title %>
       <%= form.text_field :title %>
     </div>
+
     <div>
-      <%= form.submit "Create new To Do list", class: "btn primary" %>
+      <%= form.submit(todo_list.persisted? ? "Save changes" : "Create new To Do list", class: "btn primary") %>
+      
+      <% if todo_list.persisted? %>
+        <%= link_to "Cancel", root_path, data: { turbo_frame: "_top" }, class: "btn secondary" %>
+      <% end %>
     </div>
   <% end %>
 <% end %>

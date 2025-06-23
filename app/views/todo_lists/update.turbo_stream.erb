@@ -1,3 +1,8 @@
-<%= turbo_stream.replace dom_id(@todo_list) do %>
-  <%= render partial: "todo_lists/todo_list", locals: { todo_list: @todo_list } %>
+<%= turbo_stream.replace("todo_lists") do %>
+  <%= render @todo_lists %>
+  <div id="new_todo_list">
+    <%= turbo_frame_tag "new_todo_list" do %>
+      <%= render "todo_lists/form", todo_list: TodoList.new %>
+    <% end %>
+  </div>
 <% end %>
