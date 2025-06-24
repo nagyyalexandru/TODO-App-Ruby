@@ -1,0 +1,7 @@
+.flash-message {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: $border-radius;
+  &.notice { background: #e0f7fa; color: #00796b; }
+  &.alert { background: #ffebee; color: #c62828; }
+}

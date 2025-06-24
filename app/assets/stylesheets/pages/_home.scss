@@ -1,0 +1,30 @@
+.home-index {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: $border-radius;
+
+  .welcome-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  #new_todo_list {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+  }
+}

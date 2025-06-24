@@ -1,0 +1,8 @@
+<%= turbo_stream.replace("todo_lists") do %>
+  <%= render @todo_lists %>
+  <div id="new_todo_list">
+    <%= turbo_frame_tag "new_todo_list" do %>
+      <%= render "todo_lists/form", todo_list: TodoList.new %>
+    <% end %>
+  </div>
+<% end %>

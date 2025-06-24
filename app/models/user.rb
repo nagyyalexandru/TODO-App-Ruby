@@ -5,7 +5,15 @@ class User < ApplicationRecord
 
   attr_accessor :password_confirmation
 
+  has_many :todo_lists, dependent: :destroy
+  has_many :list_shares, dependent: :destroy
+  has_many :shared_todo_lists, through: :list_shares, source: :todo_list
+
   validate :passwords_match
+
+  def accessible_todo_lists
+    TodoList.where(id: todo_lists.pluck(:id) + shared_todo_lists.pluck(:id))
+  end
 
   private
 
