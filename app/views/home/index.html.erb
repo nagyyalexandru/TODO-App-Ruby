@@ -14,11 +14,12 @@
 
     <div id="todo_lists">
         <%= render @todo_lists %>
-        <div id="new_todo_list">
-            <%= turbo_frame_tag "new_todo_list" do %>
-            <%= render "todo_lists/form", todo_list: @todo_list || TodoList.new %>
-            <% end %>
-        </div>
+    </div>
+
+    <div id="new_todo_list">
+        <%= turbo_frame_tag "new_todo_list" do %>
+        <%= render "todo_lists/form", todo_list: @todo_list || TodoList.new %>
+        <% end %>
     </div>
 
     <% else %>

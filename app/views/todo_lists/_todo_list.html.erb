@@ -3,7 +3,7 @@
     <h3><%= todo_list.title %></h3>
     <% if todo_list.user == current_user %>
       <div id="share_form_<%= todo_list.id %>">
-        <%= render "list_shares/form", todo_list: todo_list %>
+        <%= render "list_shares/form", todo_list: todo_list, available_users: User.where.not(id: current_user.id) %>
       </div>
     <% end %>
     <div id="tasks_<%= todo_list.id %>" class="tasks_wrapper">
