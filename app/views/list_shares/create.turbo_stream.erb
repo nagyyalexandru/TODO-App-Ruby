@@ -1,1 +1,4 @@
-<%= turbo_stream.replace "share_form_#{@todo_list.id}", partial: "list_shares/form", locals: { todo_list: @todo_list, available_users: User.where.not(id: current_user.id) } %>
+<%= turbo_stream.replace "share_form_#{@todo_list.id}", partial: "list_shares/form", locals: { 
+  todo_list: @todo_list, 
+  available_users: @available_users 
+} %>

@@ -4,14 +4,14 @@ class ListSharesController < ApplicationController
   def create
     @list_share = @todo_list.list_shares.new(list_share_params)
     if @list_share.save
-      @available_users = User.where.not(id: current_user.id)
-        respond_to do |format|
-          format.turbo_stream
-          format.html { redirect_to root_path }
+      @available_users = User.where.not(id: @todo_list.shared_users.pluck(:id) + [ current_user.id ])
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to root_path }
       end
     else
-      available_users = User.where.not(id: current_user.id)
-      render partial: "list_shares/form", locals: { todo_list: @todo_list, available_users: available_users }, status: :unprocessable_entity
+      @available_users = User.where.not(id: @todo_list.shared_users.pluck(:id) + [ current_user.id ])
+      render partial: "list_shares/form", locals: { todo_list: @todo_list, available_users: @available_users }, status: :unprocessable_entity
     end
   end
 
@@ -20,15 +20,14 @@ class ListSharesController < ApplicationController
     @list_share.destroy
 
     @todo_list.reload
-    @available_users = User.where.not(id: current_user.id)
-    @shared_users = @todo_list.shared_users # make this explicit
+    @available_users = User.where.not(id: @todo_list.shared_users.pluck(:id) + [ current_user.id ])
+    @shared_users = @todo_list.shared_users
 
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to root_path }
     end
   end
-
 
   private
 
