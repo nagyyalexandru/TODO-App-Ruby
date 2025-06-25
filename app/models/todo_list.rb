@@ -6,12 +6,18 @@ class TodoList < ApplicationRecord
 
   validates :title, presence: true
 
-  # For sharing functionality
   def shared_with?(user)
     shared_users.include?(user)
   end
 
   def permission_for(user)
     list_shares.find_by(user: user)&.permission_level
+  end
+
+  def editable_by?(user)
+    return true if user_id == user.id
+
+    share = list_shares.find_by(user: user)
+    share.present? && share.permission_level == "read_write"
   end
 end
