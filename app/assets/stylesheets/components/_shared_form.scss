@@ -1,0 +1,32 @@
+.share-form {
+  h4 {
+    margin-top: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    border-radius: 5x;
+    border: 1px solid #ccc;
+    background-color: white;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      outline: none;
+    }
+  }
+
+  ul {
+    padding-left: 1.2rem;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

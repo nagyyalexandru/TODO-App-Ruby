@@ -26,6 +26,15 @@
     }
   }
 
+  &.secondary-orange {
+    background-color: #ff9800;
+    color: white;
+
+    &:hover {
+      background-color: #ffa726;
+    }
+  }
+
   &.danger {
     background-color: #ff4d4f;
     color: white;
