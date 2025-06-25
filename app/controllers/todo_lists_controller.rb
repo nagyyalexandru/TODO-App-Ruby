@@ -41,7 +41,7 @@ class TodoListsController < ApplicationController
       *(@todo_lists - [ @todo_list ]).map do |list|
         turbo_stream.remove(dom_id(list))
       end,
-      turbo_stream.update("new_todo_list", "") # Empty instead of remove
+      turbo_stream.remove("new_todo_list")
     ]
   end
 
