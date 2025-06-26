@@ -1,5 +1,6 @@
 <turbo-frame id="share_form_<%= @todo_list.id %>">
     <div class="share-form">
+      <p>Share this list with another user</p>
         <%= form_with(model: [todo_list, ListShare.new]) do |form| %>
         <%= form.collection_select :user_id, available_users, :id, :email,
           { prompt: "Select user" },

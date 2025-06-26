@@ -37,15 +37,30 @@ A simple Todo application built with Ruby on Rails, PostgreSQL and Docker.
     ```bash
     rails db:create db:migrate
 
-4. Start the Rails server:
+4. Use Docker Compose to run the app
 
     ```bash
-    rails server
+    docker compose up --build
 
 5. Open your browser and navigate to http://localhost:3000
 
-To run the app with Docker Compose:
+## Screenshots
 
-    docker compose up --build
+### Welcome Page
+![Welcome Page](app/assets/images/screenshots/printscreen_welcome_blank.png)
 
-Then access the app at http://localhost:3000
+### Signup Page
+
+![Signup Page](app/assets/images/screenshots/printscreen_register_form.png)
+
+### Login page
+
+![Login Page](app/assets/images/screenshots/printscreen_login_form.png)
+
+### Todo Lists View
+
+![Todo Lists View](app/assets/images/screenshots/printscreen_lists_tasks.png)
+
+### Shared List with other User (read-only access)
+
+![Shared List View](app/assets/images/screenshots/printscreen_shared_list.png)
