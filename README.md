@@ -46,7 +46,6 @@ A simple Todo application built with Ruby on Rails, PostgreSQL and Docker.
 
 To run the app with Docker Compose:
 
-    ```bash
     docker compose up --build
 
 Then access the app at http://localhost:3000
