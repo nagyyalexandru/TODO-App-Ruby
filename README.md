@@ -42,7 +42,7 @@ A simple Todo application built with Ruby on Rails, PostgreSQL and Docker.
     ```bash
     docker compose up --build
 
-5. Open your browser and navigate to http://localhost:3000
+5. Open your browser and navigate to http://localhost:3000 (or http://127.0.0.1:3000/)
 
 ## Screenshots
 
