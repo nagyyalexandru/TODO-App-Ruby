@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <%= form_with model: @user, url: users_path, local: true do |f| %>
+  <%= form_with model: @user, url: users_path, data: { turbo: false } do |f| %>
     <%= f.label :email %>
     <%= f.text_field :email %>
     <%= f.label :password %>

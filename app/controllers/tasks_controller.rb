@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   before_action :set_todo_list
   before_action :set_task, only: [ :update, :destroy ]
+  before_action :ensure_writable!, only: [ :create, :update, :destroy ]
 
   def create
     @todo_list = TodoList.find(params[:todo_list_id])
@@ -45,6 +46,21 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def ensure_writable!
+    unless @todo_list.editable_by?(current_user)
+      respond_to do |format|
+        format.turbo_stream do
+          flash.now[:alert] = "Permission denied"
+          render turbo_stream: turbo_stream.replace("flash", partial: "layouts/flash"), status: :forbidden
+        end
+        format.html do
+          redirect_to root_path, alert: "Permission denied"
+        end
+      end
+      false
+    end
+  end
 
   def set_todo_list
     @todo_list = current_user.accessible_todo_lists.find(params[:todo_list_id])

@@ -5,9 +5,6 @@ class ListShare < ApplicationRecord
   validates :permission_level, presence: true, inclusion: { in: %w[read read_write] }
   validates :user_id, uniqueness: { scope: :todo_list_id }
 
-  after_create_commit :broadcast_share
-  after_destroy_commit :broadcast_unshare
-
   private
 
   def broadcast_share

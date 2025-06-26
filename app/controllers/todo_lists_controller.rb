@@ -13,7 +13,7 @@ class TodoListsController < ApplicationController
 
   def create
     @todo_list = current_user.todo_lists.new(todo_list_params)
-    @todo_lists = current_user.accessible_todo_lists # Needed to re-render index if needed
+    @todo_lists = current_user.accessible_todo_lists
 
     if @todo_list.save
       respond_to do |format|
@@ -38,10 +38,10 @@ class TodoListsController < ApplicationController
     @todo_lists = current_user.accessible_todo_lists
     render turbo_stream: [
       turbo_stream.replace(@todo_list, partial: "todo_lists/form", locals: { todo_list: @todo_list }),
-      *(@todo_lists - [@todo_list]).map do |list|
+      *(@todo_lists - [ @todo_list ]).map do |list|
         turbo_stream.remove(dom_id(list))
       end,
-      turbo_stream.update("new_todo_list", "") # Empty instead of remove
+      turbo_stream.remove("new_todo_list")
     ]
   end
 
