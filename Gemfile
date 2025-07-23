@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "authlogic"
 gem "recaptcha"
 gem "simple_form"
-gem "scrypt", "~> 3.0"
+gem "scrypt", "~> 3.1"
 gem "sortablejs-rails"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
