@@ -313,9 +313,9 @@ GEM
       google-protobuf (~> 4.31)
     sass-embedded (1.89.2-x86_64-linux-musl)
       google-protobuf (~> 4.31)
-    scrypt (3.0.8)
+    scrypt (3.1.0)
       ffi-compiler (>= 1.0, < 2.0)
-      rake (>= 9, < 14)
+      rake (~> 13)
     securerandom (0.4.1)
     selenium-webdriver (4.33.0)
       base64 (~> 0.2)
@@ -391,7 +391,7 @@ DEPENDENCIES
   rails (~> 7.2.2, >= 7.2.2.1)
   recaptcha
   rubocop-rails-omakase
-  scrypt (~> 3.0)
+  scrypt (~> 3.1)
   selenium-webdriver
   simple_form
   sortablejs-rails
